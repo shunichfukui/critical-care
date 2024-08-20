@@ -2,15 +2,18 @@
 
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import { fetchRandomNumber } from './utils/generateRandomNumber';
 
 export default function Home() {
   const router = useRouter();
 
   const handleRandomPage = () => {
-    if (Math.random() > 0.5) {
+    const randomNumber = fetchRandomNumber();
+
+    if (randomNumber > 5) {
       router.push('/openEye');
     } else {
-      router.push('/dontOpenEye');
+      router.push('/closeEye');
     }
   };
 
