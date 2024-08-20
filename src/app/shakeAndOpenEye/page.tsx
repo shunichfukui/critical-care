@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import styles from './../page.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { E3V2M6, E3V3M6, E3V4M6, E4V2M6, E4V3M6, E4V4M6 } from '../constants';
 
-const ShakeAndOpenEye = () => {
+const ShakeAndOpenEyeContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isFromClose = !!searchParams.get('isFromClose');
@@ -16,7 +16,6 @@ const ShakeAndOpenEye = () => {
     solid: { label: 'しっかり答える', code: E4V4M6, isFromClose: E3V4M6 },
   };
 
-  // selectedAnswerの型をanswersのキーに制限
   const answerKeys = Object.keys(answerData) as Array<keyof typeof answerData>;
   const [selectedAnswer, setSelectedAnswer] =
     useState<keyof typeof answerData>();
@@ -24,7 +23,7 @@ const ShakeAndOpenEye = () => {
   useEffect(() => {
     const randomKey = answerKeys[Math.floor(Math.random() * answerKeys.length)];
     setSelectedAnswer(randomKey);
-  }, []);
+  }, [answerKeys]);
 
   const handleShakePage = () => {
     if (selectedAnswer) {
@@ -54,5 +53,11 @@ const ShakeAndOpenEye = () => {
     </div>
   );
 };
+
+const ShakeAndOpenEye = () => (
+  <Suspense fallback={<div>読み込み中...</div>}>
+    <ShakeAndOpenEyeContent />
+  </Suspense>
+);
 
 export default ShakeAndOpenEye;
