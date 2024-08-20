@@ -12,9 +12,17 @@ const AnswerContent = () => {
   return (
     <div className={styles.border}>
       <h2 className={styles.subTitle}>回答</h2>
-      {answer && <h3 className={styles.title}>{fetchAnswerText(answer)}</h3>}
       <h2 className={styles.title}>{answer}</h2>
     </div>
+  );
+};
+
+const AnswerContentSecond = () => {
+  const searchParams = useSearchParams();
+  const answer = searchParams.get('answer');
+
+  return (
+    <>{answer && <h3 className={styles.title}>{fetchAnswerText(answer)}</h3>}</>
   );
 };
 
@@ -34,6 +42,9 @@ const Answer = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>終了！ お疲れ様でした！</h1>
+        <Suspense fallback={<div>読み込み中...</div>}>
+          <AnswerContentSecond />
+        </Suspense>
         <Suspense fallback={<div>読み込み中...</div>}>
           {isShowText && <AnswerContent />}
         </Suspense>
