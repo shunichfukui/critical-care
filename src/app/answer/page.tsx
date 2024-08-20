@@ -2,7 +2,7 @@
 
 import React, { useState, Suspense } from 'react';
 import styles from './../page.module.css';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { fetchAnswerText } from '../utils/fetchAnswerText';
 
 const AnswerContent = () => {
@@ -10,19 +10,24 @@ const AnswerContent = () => {
   const answer = searchParams.get('answer');
 
   return (
-    <>
+    <div className={styles.border}>
       <h2 className={styles.subTitle}>回答</h2>
-      {answer && <h3>{fetchAnswerText(answer)}</h3>}
-      <h2 className={styles.borderTitle}>{answer}</h2>
-    </>
+      {answer && <h3 className={styles.title}>{fetchAnswerText(answer)}</h3>}
+      <h2 className={styles.title}>{answer}</h2>
+    </div>
   );
 };
 
 const Answer = () => {
   const [isShowText, setIsShowText] = useState(false);
+  const router = useRouter();
 
   const handleShowAnswer = () => {
     setIsShowText(true);
+  };
+
+  const handleGoHome = () => {
+    router.push('/'); // ホームページに戻るための処理
   };
 
   return (
@@ -38,6 +43,12 @@ const Answer = () => {
             className={styles.showAnswerButton}
           >
             回答を見る
+          </button>
+        )}
+        <br />
+        {isShowText && (
+          <button className={styles.button} onClick={handleGoHome}>
+            最初から
           </button>
         )}
       </main>
