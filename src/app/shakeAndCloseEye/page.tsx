@@ -29,7 +29,7 @@ const ShakeAndCloseEye = () => {
     ) {
       router.push(`/${selectedAnswer}?answer=${E1V1M5}`);
     } else if (selectedAnswer) {
-      router.push(`/${selectedAnswer}`);
+      router.push(`/${selectedAnswer}?isFromClose=true`);
     }
   };
 

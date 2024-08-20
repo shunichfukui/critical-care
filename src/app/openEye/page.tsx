@@ -34,8 +34,10 @@ const ShakeAndOpenEye = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <h1 className={styles.title}>目が開いているかの確認をした結果、</h1>
+        <h1 className={styles.title}>目が開いていて、</h1>
         {selectedAnswer && (
-          <h1 className={styles.title}>{answerData[selectedAnswer].label}</h1>
+          <h2 className={styles.title}>{answerData[selectedAnswer].label}</h2>
         )}
         <br />
         <button className={styles.button} onClick={handleShakePage}>

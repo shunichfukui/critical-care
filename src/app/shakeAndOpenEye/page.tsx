@@ -2,16 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './../page.module.css';
-import { useRouter } from 'next/navigation';
-import { E4V2M6, E4V3M6, E4V4M6 } from '../constants';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { E3V2M6, E3V3M6, E3V4M6, E4V2M6, E4V3M6, E4V4M6 } from '../constants';
 
 const ShakeAndOpenEye = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isFromClose = !!searchParams.get('isFromClose');
 
   const answerData = {
-    strange: { label: '変なことを言う', code: E4V2M6 },
-    onlyName: { label: '名前しか言わない', code: E4V3M6 },
-    solid: { label: 'しっかり答える', code: E4V4M6 },
+    strange: { label: '変なことを言う', code: E4V2M6, isFromClose: E3V2M6 },
+    onlyName: { label: '名前しか言わない', code: E4V3M6, isFromClose: E3V3M6 },
+    solid: { label: 'しっかり答える', code: E4V4M6, isFromClose: E3V4M6 },
   };
 
   // selectedAnswerの型をanswersのキーに制限
@@ -26,7 +28,14 @@ const ShakeAndOpenEye = () => {
 
   const handleShakePage = () => {
     if (selectedAnswer) {
-      const { code } = answerData[selectedAnswer];
+      let code = null;
+
+      if (isFromClose) {
+        code = answerData[selectedAnswer].isFromClose;
+      } else {
+        code = answerData[selectedAnswer].code;
+      }
+
       router.push(`/answer?answer=${code}`);
     }
   };
