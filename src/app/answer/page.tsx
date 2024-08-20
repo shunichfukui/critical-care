@@ -4,7 +4,7 @@ import React, { useState, Suspense } from 'react';
 import styles from './../page.module.css';
 import { useSearchParams } from 'next/navigation';
 
-const Shake = () => {
+const Answer = () => {
   const [isShowText, setIsShowText] = useState(false);
 
   const searchParams = useSearchParams();
@@ -35,4 +35,4 @@ const Shake = () => {
   );
 };
 
-export default Shake;
+export default Answer;
