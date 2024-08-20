@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import styles from './../page.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { E3V2M6, E3V3M6, E3V4M6, E4V2M6, E4V3M6, E4V4M6 } from '../constants';
+import { E2V2M6, E2V3M6, E2V4M6, E4V2M6, E4V3M6, E4V4M6 } from '../constants';
 
 const ShakeAndOpenEyeContent = () => {
   const router = useRouter();
@@ -11,9 +11,21 @@ const ShakeAndOpenEyeContent = () => {
   const isFromClose = !!searchParams.get('isFromClose');
 
   const answerData = {
-    strange: { label: '変なことを言う', code: E4V2M6, isFromClose: E3V2M6 },
-    onlyName: { label: '名前しか言わない', code: E4V3M6, isFromClose: E3V3M6 },
-    solid: { label: 'しっかり答える', code: E4V4M6, isFromClose: E3V4M6 },
+    strange: {
+      label: '揺さぶったら目が開き、変なことを言う',
+      code: E4V2M6,
+      isFromClose: E2V2M6,
+    },
+    onlyName: {
+      label: '揺さぶったら目が開き、名前しか言わない',
+      code: E4V3M6,
+      isFromClose: E2V3M6,
+    },
+    solid: {
+      label: '揺さぶったら目が開き、しっかり答える',
+      code: E4V4M6,
+      isFromClose: E2V4M6,
+    },
   };
 
   const answerKeys = Object.keys(answerData) as Array<keyof typeof answerData>;
@@ -35,7 +47,7 @@ const ShakeAndOpenEyeContent = () => {
         code = answerData[selectedAnswer].code;
       }
 
-      router.push(`/answer?answer=${code}`);
+      router.push(`/answer?answer=${code}&isFromClose=true`);
     }
   };
 

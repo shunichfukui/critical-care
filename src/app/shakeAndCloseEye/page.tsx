@@ -10,7 +10,7 @@ const ShakeAndCloseEye = () => {
 
   const answers = {
     shakeAndOpenEye: '強く押したら目が開いた',
-    answer: '強く押しても目が開かない',
+    answer: '強く押しても目が開かず、痛みを払い除けた',
   };
 
   // selectedAnswerの型をanswersのキーに制限
@@ -25,9 +25,9 @@ const ShakeAndCloseEye = () => {
   const handleShakePage = () => {
     if (
       selectedAnswer &&
-      answers[selectedAnswer] === '強く押しても目が開かない'
+      answers[selectedAnswer] === '強く押しても目が開かず、痛みを払い除けた'
     ) {
-      router.push(`/${selectedAnswer}?answer=${E1V1M5}`);
+      router.push(`/${selectedAnswer}?answer=${E1V1M5}&isFromClose=true`);
     } else if (selectedAnswer) {
       router.push(`/${selectedAnswer}?isFromClose=true`);
     }

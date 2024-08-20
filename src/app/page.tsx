@@ -10,10 +10,12 @@ export default function Home() {
   const handleRandomPage = () => {
     const randomNumber = fetchRandomNumber();
 
-    if (randomNumber > 5) {
+    if (randomNumber <= 3) {
       router.push('/openEye');
-    } else {
+    } else if (randomNumber <= 6) {
       router.push('/closeEye');
+    } else {
+      router.push('/openEyeFromVoice');
     }
   };
 

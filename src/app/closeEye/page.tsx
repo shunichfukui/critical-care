@@ -3,13 +3,15 @@
 import React from 'react';
 import styles from './../page.module.css';
 import { useRouter } from 'next/navigation';
+import { fetchRandomNumber } from '../utils/generateRandomNumber';
 
 const OpenEye = () => {
   const router = useRouter();
 
   const handleShakePage = () => {
-    const page = Math.random() > 0.5 ? 'shakeAndCloseEye' : 'shakeAndOpenEye';
-    router.push(`/${page}`);
+    const page =
+      fetchRandomNumber() > 5 ? 'shakeAndCloseEye' : 'shakeAndOpenEye';
+    router.push(`/${page}?isFromClose=true`);
   };
 
   return (
